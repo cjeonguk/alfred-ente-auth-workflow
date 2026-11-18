@@ -419,6 +419,8 @@ Search your Ente Auth codes with `ea {query}`.
 
 If a code expires in less than 3 seconds, the workflow waits for the next code before copying it.
 
+Each code shows its issuer's icon, chosen the same way as the Ente Auth app: Ente's custom icons first, then [Simple Icons](https://simpleicons.org), falling back to a colored circle with the issuer's first letter. Icons are downloaded once on first use and cached. Icons you picked manually in the app are not available through the ente CLI, so they are not reflected.
+
 ## Requirements
 
 Install the [ente CLI](https://github.com/ente-io/ente/tree/main/cli) and sign in with `ente account add`.
@@ -428,12 +430,16 @@ Install the [ente CLI](https://github.com/ente-io/ente/tree/main/cli) and sign i
 - **Keyword** (`keyword`, default `ea`): Search keyword
 - **ente CLI path** (`ente_path`, default `/opt/homebrew/bin/ente`): Path to the ente executable. Alfred does not read your shell `PATH`.
 - **Account** (`ente_account`, default empty): Account name to pass to `--account`. Leave empty to use the selected account.
+- **Icon appearance** (`icon_appearance`, default Auto): Light or dark icon variant. Auto follows the system appearance; match it to your Alfred theme.
+
 ## Notice
 
 This is an unofficial workflow and is not affiliated with or endorsed by Ente.
 Ente and Ente Auth are trademarks of their respective owners.
 
 The workflow icon is the official Ente Auth macOS icon from the [ente-io/ente](https://github.com/ente-io/ente/blob/8980b6acefa8e5b36214ecfa9dc3795b31a59464/mobile/apps/auth/assets/generation-icons/icon-macos.png) repository, resized to 256×256.
+
+Issuer icons are downloaded at runtime from the Ente Auth custom icons and [Simple Icons](https://github.com/simple-icons/simple-icons) and are not bundled with this workflow. All brand names and logos are the property of their respective owners.
 </string>
 	<key>uidata</key>
 	<dict>
@@ -573,6 +579,36 @@ The workflow icon is the official Ente Auth macOS icon from the [ente-io/ente](h
 			<string>textfield</string>
 			<key>variable</key>
 			<string>ente_account</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>auto</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>Auto (system appearance)</string>
+						<string>auto</string>
+					</array>
+					<array>
+						<string>Light</string>
+						<string>light</string>
+					</array>
+					<array>
+						<string>Dark</string>
+						<string>dark</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string>Match this to your Alfred theme so dark or light grey brand icons stay visible</string>
+			<key>label</key>
+			<string>Icon appearance</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>icon_appearance</string>
 		</dict>
 	</array>
 	<key>version</key>
