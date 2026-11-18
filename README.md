@@ -1,55 +1,57 @@
 # Ente Auth for Alfred
 
-[ente CLI](https://github.com/ente-io/ente/tree/main/cli)로 Ente Auth의 2FA 코드를 Alfred에서 검색·복사·붙여넣기하는 workflow.
+English | [한국어](README.ko.md)
 
-## 사용법
+An Alfred workflow to search, copy, and paste Ente Auth 2FA codes using the [ente CLI](https://github.com/ente-io/ente/tree/main/cli).
 
-`ea {검색어}`로 Ente Auth 코드를 검색합니다.
+## Usage
 
-- **↵** 코드 복사 (클립보드 기록에 남지 않음)
-- **⌘↵** 맨 앞 앱에 바로 붙여넣기
-- **⌥↵** 실시간 코드 보기 (1초마다 갱신, 여기서도 ↵ 복사 / ⌘↵ 붙여넣기)
+Search your Ente Auth codes with `ea {query}`.
 
-만료 3초 전인 코드는 다음 코드가 나올 때까지 기다렸다가 복사합니다.
+- **↵** Copy the code (not saved to clipboard history)
+- **⌘↵** Paste the code into the frontmost app
+- **⌥↵** Open the live code view (refreshes every second; ↵ copies and ⌘↵ pastes from there too)
 
-## 요구 사항
+If a code expires in less than 3 seconds, the workflow waits for the next code before copying it.
 
-[ente CLI](https://github.com/ente-io/ente/tree/main/cli)를 설치하고 `ente account add`로 로그인해 두어야 합니다.
+## Requirements
 
-## 설정 (Workflow Configuration)
+Install the [ente CLI](https://github.com/ente-io/ente/tree/main/cli) and sign in with `ente account add`.
 
-| 변수 | 기본값 | 설명 |
+## Configuration (Workflow Configuration)
+
+| Variable | Default | Description |
 |---|---|---|
-| `keyword` | `ea` | 검색 키워드 |
-| `ente_path` | `/opt/homebrew/bin/ente` | ente 실행 파일 경로 (Alfred는 셸 PATH를 읽지 않음) |
-| `ente_account` | (비움) | 특정 계정을 쓰려면 `--account`에 넘길 이름 |
+| `keyword` | `ea` | Search keyword |
+| `ente_path` | `/opt/homebrew/bin/ente` | Path to the ente executable (Alfred does not read your shell `PATH`) |
+| `ente_account` | (empty) | Account name to pass to `--account` |
 
-## 구조
+## Structure
 
 ```
-src/                 Alfred workflow 폴더 그대로
-├── info.plist       객체·연결·설정 정의
-└── ente-auth.js     JXA 스크립트 (list / code / live)
+src/                 The Alfred workflow folder as-is
+├── info.plist       Objects, connections, and configuration
+└── ente-auth.js     JXA script (list / code / live)
 scripts/
-├── link.sh          src/를 Alfred workflows 폴더에 심링크 (개발용)
-└── build.sh         dist/Ente-Auth.alfredworkflow 패키징
+├── link.sh          Symlink src/ into Alfred's workflows folder (development)
+└── build.sh         Package dist/ente-auth.alfredworkflow
 ```
 
-흐름:
+Flow:
 
 ```
-ea {query} ──list──▶ ↵ / ⌘↵ ──code──▶ {var:action} ─┬─ paste → 붙여넣기
-     │                  ▲                           ├─ error → 오류 알림
-     └─ ⌥↵ ──live (1s rerun)                        └─ copy  → 복사 + 알림
+ea {query} ──list──▶ ↵ / ⌘↵ ──code──▶ {var:action} ─┬─ paste → paste
+     │                  ▲                           ├─ error → error notification
+     └─ ⌥↵ ──live (1s rerun)                        └─ copy  → copy + notification
 ```
 
-- `list`: `ente auth code list --all`(온라인, 실패 시 `--offline`) 결과를 Alfred가 직접 필터링. 5분 캐시 + `loosereload`로 캐시를 보여주며 백그라운드 갱신.
-- `code`: `ente auth code view <id> --offline`. 목록 갱신 때 이미 sync되므로 오프라인으로 빠르게 조회.
-- `live`: OTP와 만료 시각을 Script Filter 변수로 유지해 만료 시에만 `ente`를 다시 호출.
+- `list`: Alfred filters the output of `ente auth code list --all` (online, falling back to `--offline` on failure). Results are cached for 5 minutes with `loosereload`, so the cache is shown immediately while it refreshes in the background.
+- `code`: `ente auth code view <id> --offline`. The list refresh already syncs local data, so the offline lookup is fast.
+- `live`: Keeps the OTP and its expiry in Script Filter variables and calls `ente` again only when the code expires.
 
-## 개발
+## Development
 
 ```sh
-scripts/link.sh    # Alfred에 개발용으로 연결
-scripts/build.sh   # 배포용 패키지 생성
+scripts/link.sh    # Link into Alfred for development
+scripts/build.sh   # Build the distributable package
 ```

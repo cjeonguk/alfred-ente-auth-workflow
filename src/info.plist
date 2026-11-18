@@ -26,7 +26,7 @@
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>맨 앞 앱에 붙여넣기</string>
+				<string>Paste to frontmost app</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -36,7 +36,7 @@
 				<key>modifiers</key>
 				<integer>524288</integer>
 				<key>modifiersubtext</key>
-				<string>실시간 코드 보기</string>
+				<string>Show live code</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -59,7 +59,7 @@
 				<key>modifiers</key>
 				<integer>1048576</integer>
 				<key>modifiersubtext</key>
-				<string>맨 앞 앱에 붙여넣기</string>
+				<string>Paste to frontmost app</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -141,7 +141,7 @@
 	<key>createdby</key>
 	<string>Jeonguk Choi</string>
 	<key>description</key>
-	<string>ente CLI로 Ente Auth 2FA 코드를 검색·복사·붙여넣기</string>
+	<string>Search, copy, and paste Ente Auth 2FA codes via the ente CLI</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -174,7 +174,7 @@
 				<key>queuemode</key>
 				<integer>1</integer>
 				<key>runningsubtext</key>
-				<string>코드 목록 불러오는 중…</string>
+				<string>Loading codes…</string>
 				<key>script</key>
 				<string>./ente-auth.js list</string>
 				<key>scriptargtype</key>
@@ -184,7 +184,7 @@
 				<key>skipuniversalaction</key>
 				<true/>
 				<key>subtext</key>
-				<string>2FA 코드 검색</string>
+				<string>Search 2FA codes</string>
 				<key>title</key>
 				<string>Ente Auth</string>
 				<key>type</key>
@@ -375,7 +375,7 @@
 				<key>removeextension</key>
 				<false/>
 				<key>text</key>
-				<string>코드 복사됨 · {var:remaining}초 남음</string>
+				<string>Code copied · {var:remaining}s left</string>
 				<key>title</key>
 				<string>{var:code_name}</string>
 			</dict>
@@ -398,7 +398,7 @@
 				<key>text</key>
 				<string>{query}</string>
 				<key>title</key>
-				<string>Ente Auth 오류</string>
+				<string>Ente Auth error</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
@@ -409,26 +409,35 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>## 사용법
+	<string>## Usage
 
-`ea {검색어}`로 Ente Auth 코드를 검색합니다.
+Search your Ente Auth codes with `ea {query}`.
 
-- **↵** 코드 복사 (클립보드 기록에 남지 않음)
-- **⌘↵** 맨 앞 앱에 바로 붙여넣기
-- **⌥↵** 실시간 코드 보기 (1초마다 갱신, 여기서도 ↵ 복사 / ⌘↵ 붙여넣기)
+- **↵** Copy the code (not saved to clipboard history)
+- **⌘↵** Paste the code into the frontmost app
+- **⌥↵** Open the live code view (refreshes every second; ↵ copies and ⌘↵ pastes from there too)
 
-만료 3초 전인 코드는 다음 코드가 나올 때까지 기다렸다가 복사합니다.
+If a code expires in less than 3 seconds, the workflow waits for the next code before copying it.
 
-## 요구 사항
+## Requirements
 
-[ente CLI](https://github.com/ente-io/ente/tree/main/cli)를 설치하고 `ente account add`로 로그인해 두어야 합니다.
+Install the [ente CLI](https://github.com/ente-io/ente/tree/main/cli) and sign in with `ente account add`.
+
+## Configuration (Workflow Configuration)
+
+| Variable | Default | Description |
+|---|---|---|
+| `keyword` | `ea` | Search keyword |
+| `ente_path` | `/opt/homebrew/bin/ente` | Path to the ente executable (Alfred does not read your shell `PATH`) |
+| `ente_account` | (empty) | Account name to pass to `--account` |
+
 </string>
 	<key>uidata</key>
 	<dict>
 		<key>A1E0F0A1-0001-4E7E-9A11-000000000001</key>
 		<dict>
 			<key>note</key>
-			<string>코드 목록 (Alfred가 필터링, 5분 캐시)</string>
+			<string>Code list (filtered by Alfred, 5 min cache)</string>
 			<key>xpos</key>
 			<real>50.0</real>
 			<key>ypos</key>
@@ -437,7 +446,7 @@
 		<key>A1E0F0A1-0002-4E7E-9A11-000000000002</key>
 		<dict>
 			<key>note</key>
-			<string>실시간 카운트다운 (1초 rerun)</string>
+			<string>Live countdown (1s rerun)</string>
 			<key>xpos</key>
 			<real>300.0</real>
 			<key>ypos</key>
@@ -446,7 +455,7 @@
 		<key>A1E0F0A1-0003-4E7E-9A11-000000000003</key>
 		<dict>
 			<key>note</key>
-			<string>현재 OTP 조회 (만료 3초 전이면 다음 코드 대기)</string>
+			<string>Fetch current OTP (waits for the next code if under 3s left)</string>
 			<key>xpos</key>
 			<real>480.0</real>
 			<key>ypos</key>
@@ -462,7 +471,7 @@
 		<key>A1E0F0A1-0005-4E7E-9A11-000000000005</key>
 		<dict>
 			<key>note</key>
-			<string>{var:action}에 따라 분기</string>
+			<string>Branch on {var:action}</string>
 			<key>xpos</key>
 			<real>680.0</real>
 			<key>ypos</key>
@@ -512,7 +521,7 @@
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>코드 검색 키워드</string>
+			<string>Keyword to search codes</string>
 			<key>label</key>
 			<string>Keyword</string>
 			<key>type</key>
@@ -533,9 +542,9 @@
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>ente 실행 파일의 절대 경로</string>
+			<string>Absolute path to the ente executable</string>
 			<key>label</key>
-			<string>ente CLI 경로</string>
+			<string>ente CLI path</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
@@ -554,7 +563,7 @@
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>비워두면 현재 선택된 계정 사용 (--account)</string>
+			<string>Passed to --account; leave empty to use the selected account</string>
 			<key>label</key>
 			<string>Account</string>
 			<key>type</key>

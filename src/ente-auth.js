@@ -25,7 +25,7 @@ function readPipe(pipe) {
 function ente(args) {
   const path = env('ente_path') || DEFAULT_ENTE_PATH
   if (!$.NSFileManager.defaultManager.isExecutableFileAtPath(path)) {
-    throw new Error(`ente CLI를 찾을 수 없습니다: ${path}`)
+    throw new Error(`ente CLI not found: ${path}`)
   }
 
   const fullArgs = [...args, '--json', '--no-input']
@@ -40,7 +40,7 @@ function ente(args) {
   task.standardInput = $.NSFileHandle.fileHandleWithNullDevice
   task.standardOutput = stdout
   task.standardError = stderr
-  if (!task.launchAndReturnError(null)) throw new Error(`ente 실행 실패: ${path}`)
+  if (!task.launchAndReturnError(null)) throw new Error(`Failed to launch ente: ${path}`)
 
   // Drain stdout before waiting so a large list cannot fill the pipe and block.
   const out = readPipe(stdout)
@@ -89,13 +89,13 @@ function listItem(code) {
     autocomplete: title,
     variables: codeVariables(code, 'copy'),
     mods: {
-      cmd: { arg: code.id, subtitle: '맨 앞 앱에 붙여넣기', variables: codeVariables(code, 'paste') },
-      alt: { arg: code.name, subtitle: '실시간 코드 보기', variables: codeVariables(code, 'live') },
+      cmd: { arg: code.id, subtitle: 'Paste to frontmost app', variables: codeVariables(code, 'paste') },
+      alt: { arg: code.name, subtitle: 'Show live code', variables: codeVariables(code, 'live') },
     },
   }
   if (code.type === 'hotp') {
     item.valid = false
-    item.subtitle = `${code.accountName} · HOTP는 ente CLI가 아직 지원하지 않습니다`
+    item.subtitle = `${code.accountName} · HOTP is not supported by the ente CLI yet`
   }
   return item
 }
@@ -114,7 +114,7 @@ function list() {
   }
 
   if (codes.length === 0) {
-    return { items: [{ title: '저장된 코드가 없습니다', subtitle: 'Ente Auth 앱에서 코드를 추가하세요', valid: false }] }
+    return { items: [{ title: 'No saved codes', subtitle: 'Add codes in the Ente Auth app', valid: false }] }
   }
   return {
     cache: { seconds: LIST_CACHE_SECONDS, loosereload: true },
@@ -159,7 +159,7 @@ function live() {
         arg: id,
         variables: { ...variables, action: 'copy' },
         mods: {
-          cmd: { arg: id, subtitle: '맨 앞 앱에 붙여넣기', variables: { ...variables, action: 'paste' } },
+          cmd: { arg: id, subtitle: 'Paste to frontmost app', variables: { ...variables, action: 'paste' } },
         },
         text: { copy: otp, largetype: otp },
       },
@@ -171,7 +171,7 @@ function errorOutput(command, message) {
   if (command === 'code') {
     return { alfredworkflow: { arg: message, variables: { action: 'error' } } }
   }
-  return { items: [{ title: 'Ente Auth 오류', subtitle: message, valid: false }] }
+  return { items: [{ title: 'Ente Auth error', subtitle: message, valid: false }] }
 }
 
 function run(argv) {
@@ -185,7 +185,7 @@ function run(argv) {
       case 'live':
         return JSON.stringify(live())
       default:
-        throw new Error(`알 수 없는 명령: ${command}`)
+        throw new Error(`Unknown command: ${command}`)
     }
   } catch (e) {
     return JSON.stringify(errorOutput(command, e.message))
