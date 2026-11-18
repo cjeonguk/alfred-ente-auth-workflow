@@ -4,6 +4,10 @@
 
 [ente CLI](https://ente.com/help/cli/)로 Ente Auth의 2FA 코드를 Alfred에서 검색·복사·붙여넣기하는 workflow.
 
+## 설치
+
+최신 릴리즈에서 [ente-auth.alfredworkflow](https://github.com/cjeonguk/alfred-ente-auth-workflow/releases/latest/download/ente-auth.alfredworkflow)를 받아 열면 Alfred로 가져올 수 있습니다.
+
 ## 사용법
 
 `ea {검색어}`로 Ente Auth 코드를 검색합니다.
@@ -74,6 +78,17 @@ ea {query} ──list──▶ ↵ / ⌘↵ ──code──▶ {var:action} ─
 scripts/link.sh    # Alfred에 개발용으로 연결
 scripts/build.sh   # 배포용 패키지 생성
 ```
+
+### 릴리즈
+
+버전 태그를 푸시하면 GitHub Actions(`.github/workflows/release.yml`)가 태그에서 workflow 버전을 설정하고, 패키지를 빌드해서 릴리즈 노트와 함께 GitHub Release를 만듭니다. `v1.1.0-beta.1`처럼 접미사가 붙은 태그는 프리릴리즈가 됩니다.
+
+```sh
+git tag v1.2.3
+git push origin v1.2.3
+```
+
+저장소의 `src/info.plist` `version`은 `0.0.0-dev`로 유지합니다.
 
 ## 고지
 

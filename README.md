@@ -4,6 +4,10 @@ English | [한국어](README.ko.md)
 
 An Alfred workflow to search, copy, and paste Ente Auth 2FA codes using the [ente CLI](https://ente.com/help/cli/).
 
+## Installation
+
+Download [ente-auth.alfredworkflow](https://github.com/cjeonguk/alfred-ente-auth-workflow/releases/latest/download/ente-auth.alfredworkflow) from the latest release and open it to import into Alfred.
+
 ## Usage
 
 Search your Ente Auth codes with `ea {query}`.
@@ -74,6 +78,17 @@ ea {query} ──list──▶ ↵ / ⌘↵ ──code──▶ {var:action} ─
 scripts/link.sh    # Link into Alfred for development
 scripts/build.sh   # Build the distributable package
 ```
+
+### Releasing
+
+Push a version tag. GitHub Actions (`.github/workflows/release.yml`) sets the workflow version from the tag, builds the package, and publishes a GitHub Release with generated notes. Tags with a suffix such as `v1.1.0-beta.1` become prereleases.
+
+```sh
+git tag v1.2.3
+git push origin v1.2.3
+```
+
+`version` in `src/info.plist` stays `0.0.0-dev` in the repository.
 
 ## Notice
 

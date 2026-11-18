@@ -623,7 +623,7 @@ Issuer icons are downloaded at runtime from the Ente Auth custom icons and [Simp
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.0.0</string>
+	<string>0.0.0-dev</string>
 	<key>webaddress</key>
 	<string></string>
 </dict>
