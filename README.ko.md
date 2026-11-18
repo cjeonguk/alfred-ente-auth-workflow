@@ -30,6 +30,7 @@
 
 ```
 src/                 Alfred workflow 폴더 그대로
+├── icon.png         Workflow 아이콘
 ├── info.plist       객체·연결·설정 정의
 └── ente-auth.js     JXA 스크립트 (list / code / live)
 scripts/
@@ -55,3 +56,10 @@ ea {query} ──list──▶ ↵ / ⌘↵ ──code──▶ {var:action} ─
 scripts/link.sh    # Alfred에 개발용으로 연결
 scripts/build.sh   # 배포용 패키지 생성
 ```
+
+## 고지
+
+이 workflow는 비공식이며 Ente와 제휴하거나 Ente의 승인을 받지 않았습니다.
+Ente 및 Ente Auth는 각 소유자의 상표입니다.
+
+Workflow 아이콘은 [ente-io/ente](https://github.com/ente-io/ente/blob/8980b6acefa8e5b36214ecfa9dc3795b31a59464/mobile/apps/auth/assets/generation-icons/icon-macos.png) 저장소의 공식 Ente Auth macOS 아이콘을 256×256으로 줄인 것입니다.

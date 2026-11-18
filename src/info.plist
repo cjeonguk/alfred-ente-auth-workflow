@@ -428,6 +428,12 @@ Install the [ente CLI](https://github.com/ente-io/ente/tree/main/cli) and sign i
 - **Keyword** (`keyword`, default `ea`): Search keyword
 - **ente CLI path** (`ente_path`, default `/opt/homebrew/bin/ente`): Path to the ente executable. Alfred does not read your shell `PATH`.
 - **Account** (`ente_account`, default empty): Account name to pass to `--account`. Leave empty to use the selected account.
+## Notice
+
+This is an unofficial workflow and is not affiliated with or endorsed by Ente.
+Ente and Ente Auth are trademarks of their respective owners.
+
+The workflow icon is the official Ente Auth macOS icon from the [ente-io/ente](https://github.com/ente-io/ente/blob/8980b6acefa8e5b36214ecfa9dc3795b31a59464/mobile/apps/auth/assets/generation-icons/icon-macos.png) repository, resized to 256×256.
 </string>
 	<key>uidata</key>
 	<dict>

@@ -10,6 +10,7 @@ const LIST_CACHE_SECONDS = 300
 // Codes closer than this to expiry are skipped in favour of the next one.
 const MIN_REMAINING_SECONDS = 3
 const BAR_WIDTH = 10
+const ERROR_ICON = '/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/AlertStopIcon.icns'
 
 function env(name) {
   return $.NSProcessInfo.processInfo.environment.objectForKey(name).js || ''
@@ -171,7 +172,7 @@ function errorOutput(command, message) {
   if (command === 'code') {
     return { alfredworkflow: { arg: message, variables: { action: 'error' } } }
   }
-  return { items: [{ title: 'Ente Auth error', subtitle: message, valid: false }] }
+  return { items: [{ title: 'Ente Auth error', subtitle: message, valid: false, icon: { path: ERROR_ICON } }] }
 }
 
 function run(argv) {

@@ -30,6 +30,7 @@ Install the [ente CLI](https://github.com/ente-io/ente/tree/main/cli) and sign i
 
 ```
 src/                 The Alfred workflow folder as-is
+├── icon.png         Workflow icon
 ├── info.plist       Objects, connections, and configuration
 └── ente-auth.js     JXA script (list / code / live)
 scripts/
@@ -55,3 +56,10 @@ ea {query} ──list──▶ ↵ / ⌘↵ ──code──▶ {var:action} ─
 scripts/link.sh    # Link into Alfred for development
 scripts/build.sh   # Build the distributable package
 ```
+
+## Notice
+
+This is an unofficial workflow and is not affiliated with or endorsed by Ente.
+Ente and Ente Auth are trademarks of their respective owners.
+
+The workflow icon is the official Ente Auth macOS icon from the [ente-io/ente](https://github.com/ente-io/ente/blob/8980b6acefa8e5b36214ecfa9dc3795b31a59464/mobile/apps/auth/assets/generation-icons/icon-macos.png) repository, resized to 256×256.
