@@ -425,12 +425,9 @@ Install the [ente CLI](https://github.com/ente-io/ente/tree/main/cli) and sign i
 
 ## Configuration (Workflow Configuration)
 
-| Variable | Default | Description |
-|---|---|---|
-| `keyword` | `ea` | Search keyword |
-| `ente_path` | `/opt/homebrew/bin/ente` | Path to the ente executable (Alfred does not read your shell `PATH`) |
-| `ente_account` | (empty) | Account name to pass to `--account` |
-
+- **Keyword** (`keyword`, default `ea`): Search keyword
+- **ente CLI path** (`ente_path`, default `/opt/homebrew/bin/ente`): Path to the ente executable. Alfred does not read your shell `PATH`.
+- **Account** (`ente_account`, default empty): Account name to pass to `--account`. Leave empty to use the selected account.
 </string>
 	<key>uidata</key>
 	<dict>

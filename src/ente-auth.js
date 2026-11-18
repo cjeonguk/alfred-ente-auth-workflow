@@ -71,7 +71,7 @@ function formatOtp(otp) {
 function progressBar(remaining) {
   const period = Math.max(30, Math.ceil(remaining / 30) * 30)
   const filled = Math.round((remaining / period) * BAR_WIDTH)
-  return '█'.repeat(filled) + '░'.repeat(BAR_WIDTH - filled)
+  return '●'.repeat(filled) + '○'.repeat(BAR_WIDTH - filled)
 }
 
 function codeVariables(code, action) {
