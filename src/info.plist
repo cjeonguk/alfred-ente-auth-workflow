@@ -423,7 +423,18 @@ Each code shows its issuer's icon, chosen the same way as the Ente Auth app: Ent
 
 ## Requirements
 
-Install the [ente CLI](https://github.com/ente-io/ente/tree/main/cli) and sign in with `ente account add`.
+- [ente CLI](https://ente.com/help/cli/) **0.4.0 or later** (tested with 0.4.5)
+- Signed in to Ente Auth: `ente account login --app auth`
+
+### ente CLI compatibility
+
+ente CLI [0.4.0](https://github.com/ente-io/ente/releases/tag/ente-cli-v0.4.0) (2026-10-23) is a Rust rewrite with new commands. Every command and flag this workflow uses first appeared in 0.4.0, and the Auth code commands and their JSON output are unchanged through 0.4.5.
+
+- `ente auth code list --all` (JSON fields `id`, `name`, `issuer`, `accountName`, `type`): since 0.4.0
+- `ente auth code view &lt;id&gt;` (JSON fields `otp`, `validUntil`): since 0.4.0
+- Global flags `--json`, `--offline`, `--no-input`, `--account`: since 0.4.0
+
+The previous Go CLI (0.3.0 and earlier) is **not supported**: its only Auth command is `ente auth decrypt`, and it has none of the flags above. Running the workflow with it shows the CLI's error instead of your codes.
 
 ## Configuration (Workflow Configuration)
 

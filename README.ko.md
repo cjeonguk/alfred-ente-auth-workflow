@@ -2,7 +2,7 @@
 
 [English](README.md) | 한국어
 
-[ente CLI](https://github.com/ente-io/ente/tree/main/cli)로 Ente Auth의 2FA 코드를 Alfred에서 검색·복사·붙여넣기하는 workflow.
+[ente CLI](https://ente.com/help/cli/)로 Ente Auth의 2FA 코드를 Alfred에서 검색·복사·붙여넣기하는 workflow.
 
 ## 사용법
 
@@ -18,7 +18,20 @@
 
 ## 요구 사항
 
-[ente CLI](https://github.com/ente-io/ente/tree/main/cli)를 설치하고 `ente account add`로 로그인해 두어야 합니다.
+- [ente CLI](https://ente.com/help/cli/) **0.4.0 이상** (0.4.5에서 테스트)
+- Ente Auth 로그인: `ente account login --app auth`
+
+### ente CLI 호환성
+
+ente CLI [0.4.0](https://github.com/ente-io/ente/releases/tag/ente-cli-v0.4.0) (2026-10-23)은 명령 체계가 바뀐 Rust 재작성 버전입니다. 이 workflow가 쓰는 명령과 옵션은 모두 0.4.0에서 처음 추가됐고, Auth 코드 명령과 JSON 출력은 0.4.5까지 바뀌지 않았습니다.
+
+| workflow가 사용하는 기능 | 추가된 버전 |
+|---|---|
+| `ente auth code list --all` (JSON 필드 `id`, `name`, `issuer`, `accountName`, `type`) | 0.4.0 |
+| `ente auth code view <id>` (JSON 필드 `otp`, `validUntil`) | 0.4.0 |
+| 전역 옵션 `--json`, `--offline`, `--no-input`, `--account` | 0.4.0 |
+
+이전 Go CLI(0.3.0 이하)는 **지원하지 않습니다.** Auth 관련 명령이 `ente auth decrypt`뿐이고 위 옵션도 없습니다. 이 버전으로 실행하면 코드 대신 CLI 오류 메시지가 표시됩니다.
 
 ## 설정 (Workflow Configuration)
 
