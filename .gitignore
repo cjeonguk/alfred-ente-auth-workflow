@@ -1,0 +1,3 @@
+dist/
+# Alfred writes user configuration values here
+src/prefs.plist
